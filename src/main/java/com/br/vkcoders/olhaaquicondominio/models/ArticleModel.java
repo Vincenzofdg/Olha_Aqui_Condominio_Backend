@@ -1,6 +1,5 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
-import com.br.vkcoders.olhaaquicondominio.records.AnnounceRecord;
 import com.br.vkcoders.olhaaquicondominio.records.ArticleRecord;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

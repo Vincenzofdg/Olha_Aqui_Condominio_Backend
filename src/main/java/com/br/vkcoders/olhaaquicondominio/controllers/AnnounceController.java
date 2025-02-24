@@ -11,8 +11,8 @@ import com.br.vkcoders.olhaaquicondominio.records.AnnounceRecord;
 @RequestMapping("/publication/announce")
 public class AnnounceController {
 
+    // Autowired: Dependencies Injection
     @Autowired
-    // Dependencies Injection
     private AnnounceRepository repository;
 
     @GetMapping
@@ -21,7 +21,8 @@ public class AnnounceController {
     }
 
     @PostMapping
-    public void createAnnounce(@RequestBody AnnounceRecord payload) {
+    public ResponseEntity<AnnounceRecord> createAnnounce(@RequestBody AnnounceRecord payload) {
         repository.save(new AnnounceModel(payload));
+        return ResponseEntity.ok(payload);
     }
 }
