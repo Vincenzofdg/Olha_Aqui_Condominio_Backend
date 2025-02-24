@@ -1,7 +1,6 @@
 package com.br.vkcoders.olhaaquicondominio.controllers;
 
 import com.br.vkcoders.olhaaquicondominio.models.LawModel;
-import com.br.vkcoders.olhaaquicondominio.records.ContactRecord;
 import com.br.vkcoders.olhaaquicondominio.repositories.LawRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
