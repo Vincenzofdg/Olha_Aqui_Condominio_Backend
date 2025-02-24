@@ -26,9 +26,12 @@ jobs:
         run: mkdir build && cp target/*.jar build/
 
       - name: Deploy JAR para a branch `jar-build`
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/Vincenzofdg/olha_aqui_condominio_backend.git
           git checkout --orphan jar-build
           git rm -rf .
           mv build/* .
