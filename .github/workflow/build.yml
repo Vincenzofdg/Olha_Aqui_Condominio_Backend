@@ -1,0 +1,37 @@
+name: Build and Deploy JAR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: JDK 21 setup
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build Backend Spring Boot (Maven)
+        run: mvn clean package -DskipTests
+
+      - name: Criar pasta para o build
+        run: mkdir build && cp target/*.jar build/
+
+      - name: Deploy JAR para a branch `jar-build`
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan jar-build
+          git rm -rf .
+          mv build/* .
+          git add *.jar
+          git commit -m "🚀 Novo build gerado automaticamente"
+          git push --force origin jar-build
