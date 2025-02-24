@@ -22,7 +22,7 @@ public class LawModel {
     @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 250)
     private String description;
 
     @Column(nullable = false, length = 100)

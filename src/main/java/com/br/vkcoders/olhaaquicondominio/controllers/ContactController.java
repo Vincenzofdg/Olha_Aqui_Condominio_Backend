@@ -6,6 +6,7 @@ import com.br.vkcoders.olhaaquicondominio.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/contacts")
@@ -15,8 +16,9 @@ public class ContactController {
     private ContactRepository repository;
 
     @GetMapping
-    public ResponseEntity<String> getAllAnnounces() {
-        return ResponseEntity.ok("rota de contatos GET");
+    public ResponseEntity<ContactModel> getAllAnnounces() {
+        List<ContactModel> result = repository.findAll();
+        return ResponseEntity.ok(result.getFirst());
     }
 
     @PostMapping
