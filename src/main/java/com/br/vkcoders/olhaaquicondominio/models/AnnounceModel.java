@@ -1,11 +1,14 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
 import com.br.vkcoders.olhaaquicondominio.records.AnnounceRecord;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "advertising")
@@ -32,6 +35,13 @@ public class AnnounceModel {
     private String image;
 
     private Boolean highlighted;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public AnnounceModel(AnnounceRecord payload) {
         this.title = payload.title();

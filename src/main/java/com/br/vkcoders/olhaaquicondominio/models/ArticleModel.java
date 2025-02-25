@@ -1,11 +1,14 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
 import com.br.vkcoders.olhaaquicondominio.records.ArticleRecord;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "article")
@@ -38,6 +41,13 @@ public class ArticleModel {
     private String image;
 
     private Boolean highlighted = false;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public ArticleModel(ArticleRecord payload) {
         this.title = payload.title();

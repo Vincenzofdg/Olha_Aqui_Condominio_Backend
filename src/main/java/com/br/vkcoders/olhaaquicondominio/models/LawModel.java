@@ -1,11 +1,14 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
 import com.br.vkcoders.olhaaquicondominio.records.LawRecord;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "law")
@@ -30,6 +33,13 @@ public class LawModel {
 
     @Column(nullable = false, length = 50)
     private String source;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public LawModel(LawRecord payload) {
         this.title = payload.title();
