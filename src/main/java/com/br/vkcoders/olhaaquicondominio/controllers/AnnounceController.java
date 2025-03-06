@@ -24,7 +24,7 @@ public class AnnounceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnnounceModel> getAnnounceById(@PathVariable Long id) {
+    public ResponseEntity<AnnounceModel> getAnnounceById(@PathVariable String id) {
         Optional<AnnounceModel> result = repository.findById(id);
         return result
                 .map(ResponseEntity::ok)

@@ -1,42 +1,45 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
-import com.br.vkcoders.olhaaquicondominio.records.ContactRecord;
+import com.br.vkcoders.olhaaquicondominio.records.MessageRecord;
 import com.br.vkcoders.olhaaquicondominio.utils.CustomId;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "contact")
+@Table(name = "message")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ContactModel {
+public class MessageModel {
 
     @Id
     @Column(nullable = false, updatable = false, unique = true, length = 50)
     private String id;
 
     @Column(nullable = false, length = 20)
-    private String whatsapp;
+    private String name;
 
-    @Column(nullable = false, length = 20)
-    private String phone;
+    @Column(nullable = false, length = 30)
+    private String surname;
 
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 100)
-    private String website;
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    private String message;
 
-    public ContactModel(ContactRecord payload) {
+    public MessageModel(MessageRecord payload) {
         this.id = CustomId.generateId();
-        this.whatsapp = payload.whatsapp();
-        this.phone = payload.phone();
+        this.name = payload.name();
+        this.surname = payload.surname();
         this.email = payload.email();
-        this.website = payload.website();
+        this.message = payload.message();
     }
 }

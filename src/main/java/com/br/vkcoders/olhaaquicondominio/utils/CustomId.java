@@ -4,22 +4,25 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class CustomId {
     public static String generateId() {
-        // 🔹 1. Gerar a parte da data e hora
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH/mm/ss");
-        String dateTimePart = formatter.format(new Date());
+        // 🔹 1. Gerar a parte da data no formato correto: "ddMMyyyy"
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        String datePart = dateFormat.format(new Date());
 
         // 🔹 2. Gerar um hash aleatório de 8 caracteres (números e letras)
-        String hashPart = generateRandomHash(8);
+        String hashPart = generateRandomHash(6);  // Agora 6 caracteres, mais curto e eficiente
 
-        // 🔹 3. Montar o ID final
-        return dateTimePart + "-" + hashPart;
+        // 🔹 3. Gerar a parte da hora no formato "HHmmss"
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
+        String timePart = timeFormat.format(new Date());
+
+        // 🔹 4. Montar o ID no formato correto: "DDMMYYYY-HASH-HHMMSS"
+        return datePart + "-" + hashPart + "-" + timePart;
     }
 
     private static String generateRandomHash(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; // Possíveis caracteres do hash
+        String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
         StringBuilder hash = new StringBuilder();
 

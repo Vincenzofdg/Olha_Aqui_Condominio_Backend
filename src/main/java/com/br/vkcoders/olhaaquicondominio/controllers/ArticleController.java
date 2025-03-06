@@ -24,7 +24,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleModel> getArticleById(@PathVariable Long id) {
+    public ResponseEntity<ArticleModel> getArticleById(@PathVariable String id) {
         Optional<ArticleModel> result = repository.findById(id);
         return result
                 .map(ResponseEntity::ok)

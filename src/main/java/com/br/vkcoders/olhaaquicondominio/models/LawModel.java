@@ -1,6 +1,7 @@
 package com.br.vkcoders.olhaaquicondominio.models;
 
 import com.br.vkcoders.olhaaquicondominio.records.LawRecord;
+import com.br.vkcoders.olhaaquicondominio.utils.CustomId;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.*;
@@ -19,8 +20,8 @@ import java.time.LocalDateTime;
 public class LawModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(nullable = false, updatable = false, unique = true, length = 50)
+    private String id;
 
     @Column(nullable = false, length = 50)
     private String title;
@@ -42,6 +43,7 @@ public class LawModel {
     private LocalDateTime updatedAt;
 
     public LawModel(LawRecord payload) {
+        this.id = CustomId.generateId();
         this.title = payload.title();
         this.description = payload.description();
         this.link = payload.link();

@@ -23,7 +23,7 @@ public class LawController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LawModel> getLawById(@PathVariable Long id) {
+    public ResponseEntity<LawModel> getLawById(@PathVariable String id) {
         Optional<LawModel> result = repository.findById(id);
         return result
                 .map(ResponseEntity::ok)
