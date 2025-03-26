@@ -41,6 +41,9 @@ public class AnnounceModel {
     @Column(length = 500)
     private String image;
 
+    @Column(nullable = false, length = 50)
+    private String target;
+
     private Boolean highlighted;
 
     @CreationTimestamp
@@ -59,6 +62,7 @@ public class AnnounceModel {
         this.phone = payload.phone();
         this.whatsapp = payload.whatsapp();
         this.tag = payload.tag();
+        this.target = payload.target() != null ? payload.target() : "condominium";
         this.highlighted = payload.highlighted() != null ? payload.highlighted() : false;
         this.image = "/images/announce/" + generateId + ".jpg";
     }
